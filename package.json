@@ -1,0 +1,22 @@
+{
+  "name": "cucumbertest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "cucumber-js test"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@cucumber/cucumber": "^10.8.0",
+    "@playwright/test": "^1.46.0",
+    "@types/node": "^22.2.0",
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
