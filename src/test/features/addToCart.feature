@@ -10,6 +10,6 @@ Tests adding items to cart
     Then User is navigated to "<url>"
 
     Examples:
-      | item                  | subitem         | url                                        |
-      | Смартфони та телефони | Останні новинки | https://allo.ua/ua/products/mobile/new-da/ |
-      #| Аудіо  | Дитячі                              | https://allo.ua/ua/products/mobile/serija_smartfony-iphone_13/                                               |
+      | item                  | subitem         | url                                                         |
+      | Смартфони та телефони | Останні новинки | https://allo.ua/ua/products/mobile/new-da/                  |
+      | Аудіо                 | Дитячі          | https://allo.ua/ua/naushniki/naznachenie_naushniki-detskie/ |
