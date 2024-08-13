@@ -8,6 +8,6 @@
         "publishQuiet": true,
         "dryRun": false,
         "require": ["src/test/steps/*.ts", "src/hooks/hooks.ts"],
-        "format": ["html:cucumber-report.html"]
+        "format": ["progress-bar", "html:test-results/cucumber-report.html", "json:test-results/cucumber-report.json"]
      }
 }

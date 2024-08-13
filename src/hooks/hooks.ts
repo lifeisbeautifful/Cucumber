@@ -20,7 +20,7 @@ After(async function({ pickle, result }) {
     
     if(result?.status == Status.FAILED){
         //screenshot
-    const img = await pageFixture.page.screenshot({ path: `./test-result/screenshots/${ pickle.name }.png`, type: "png" });
+    const img = await pageFixture.page.screenshot({ path: `./test-results/screenshots/${ pickle.name }.png`, type: "png" });
     await this.attach(img, "image/png");
     }
     
