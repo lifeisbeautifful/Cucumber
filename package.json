@@ -5,7 +5,7 @@
   "scripts": {
     "test": "cucumber-js test"
   },
-  "type": "module",
+  
   "keywords": [],
   "author": "",
   "license": "ISC",

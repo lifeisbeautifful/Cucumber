@@ -1,9 +1,10 @@
 {
     "default": {
+        "requireModule": ["ts-node/register"],
         "formatOptions": {
             "snippetInterface": "async-await"
         },
-        "paths": ["src/test/features/"],
+        "paths": ["src/test/features/addToCart.feature"],
         "publishQuiet": true,
         "dryRun": false,
         "require": ["src/test/steps/*.ts"]
