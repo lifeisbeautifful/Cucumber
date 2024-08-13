@@ -1,12 +1,12 @@
 import { When, Given, Then, setDefaultTimeout } from "@cucumber/cucumber";
-import { Browser, chromium, expect, Page} from "@playwright/test";
+import { expect } from "@playwright/test";
 import { pageFixture } from "../../hooks/pageFixture";
 
 setDefaultTimeout(60 * 1000 * 2);
 
 
 Given('User is navigated to home page', { timeout: 10000},  async function () {
-    await pageFixture.page.goto("https://allo.ua/");
+    await pageFixture.page.goto(process.env.BASEURL);
     await expect(pageFixture.page).toHaveURL("https://allo.ua/");
 });
 

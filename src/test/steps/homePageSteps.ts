@@ -1,7 +1,7 @@
 import { Given, setDefaultTimeout } from "@cucumber/cucumber"
 import { pageFixture } from "../../hooks/pageFixture";
 import { HomePage } from "../../pages/homePage";
-import { Browser, chromium, expect, Page} from "@playwright/test";
+import { expect } from "@playwright/test";
 
 setDefaultTimeout(60 * 1000 * 2);
 

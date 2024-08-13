@@ -8,7 +8,7 @@ report.generate({
   displayDuration: false,
   metadata: {
     browser: {
-      name: "chrome",
+      name: "firefox",
       version: "127",
     },
     device: "Local test machine",
