@@ -7,6 +7,7 @@ import { createLogger } from "winston";
 import { options } from "../helper/util/logger";
 const fs = require("fs-extra");
 
+
 let browser: Browser;
 let context: BrowserContext;
 
@@ -34,18 +35,19 @@ After(async function({ pickle, result }) {
 
     if(result?.status == Status.FAILED){
         //screenshot
-    const img = await pageFixture.page.screenshot({ path: `./test-results/screenshots/${ pickle.name }.png`, type: "png" });
-    videoPath = await pageFixture.page.video().path();
+    const img = await pageFixture.page.screenshot({ path: `./test-results/reports/screenshots/${ pickle.name }.png`, type: "png" });
+    await this.attach(img, "image/png");
+    //videoPath = await pageFixture.page.video().path();
     }
     
     await pageFixture.page.close();
     await context.close();
 
-    if(result?.status == Status.FAILED){
-        await this.attach(img, "image/png");
-        //is not working, probably playwright bug
-        //await this.attach(fs.readFileSync(videoPath));
-    }
+    // if(result?.status == Status.FAILED){
+    //     await this.attach(img, "image/png");
+    //     //is not working, probably playwright bug
+    //     //await this.attach(fs.readFileSync(videoPath));
+    // }
 });
 
 AfterAll(async function() {

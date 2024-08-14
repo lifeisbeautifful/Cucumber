@@ -1,30 +1,19 @@
 import { When, Given, Then, setDefaultTimeout } from "@cucumber/cucumber";
-import { expect } from "@playwright/test";
 import { pageFixture } from "../../hooks/pageFixture";
+import { homePage, asserts } from "./homePageSteps";
 
 setDefaultTimeout(60 * 1000 * 2);
 
 
-Given('User is navigated to home page', { timeout: 10000},  async function () {
-    await pageFixture.page.goto(process.env.BASEURL);
-    await expect(pageFixture.page).toHaveURL("https://allo.ua/");
-    pageFixture.logger.info("Navigation to home page");
-});
-
 When('Items catalog is opened', async function () {
-    let catalogBtn = await pageFixture.page.locator("//div[@class='ct-button']");
-    await catalogBtn.click();
+    await homePage.clickCatalogBtn();
   });
 
   When('{string}, {string} are selected', {timeout: 50000}, async function (item, subItem) {
-    let catalog = await pageFixture.page.locator("#js-menu-wrapper");
-    let categoryItem = await catalog.getByText(item, {exact:true});
-    await categoryItem.hover();
-    pageFixture.logger.info("select " + item + " item");
-    await this.catalog.getByRole("link", {name:`${subItem }`, exact:true}).click();
+    await homePage.catalog.selectSubcatalogItem(item, subItem);
     pageFixture.logger.info("select " + subItem + " subitem");
   });
 
 Then('User is navigated to {string}', async function (url) {
-    await expect(pageFixture.page).toHaveURL(url);
+    await asserts.assertUrlContains(url);
   });

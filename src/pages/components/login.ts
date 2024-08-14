@@ -1,16 +1,17 @@
 import {Locator, Page, expect} from "@playwright/test"
+import { pageFixture } from "../../hooks/pageFixture"
 
 export class Login{
-    readonly page:Page;
-    readonly phoneField:Locator;
-    readonly enterBtn:Locator;
-    readonly loginPopup:Locator;
+    page:Page;
+    phoneField:Locator;
+    enterBtn:Locator;
+    loginPopup:Locator;
 
-    constructor(page:Page){
-        this.page=page;
-        this.phoneField = page.locator("//input[@name='telephone']");
-        this.enterBtn = page.locator("//button[@type='submit' and @class='a-button a-button--block a-button--lg a-button--primary']");
-        this.loginPopup = page.locator("#customer-popup-menu");
+    constructor(){
+        this.page = pageFixture.page;
+        this.phoneField = this.page.locator("//input[@name='telephone']");
+        this.enterBtn = this.page.locator("//button[@type='submit' and @class='a-button a-button--block a-button--lg a-button--primary']");
+        this.loginPopup = this.page.locator("#customer-popup-menu");
     }
 
     async loginViaPhoneNumber(phoneNumber:string){

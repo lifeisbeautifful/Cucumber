@@ -1,20 +1,21 @@
-import {Locator, Page, expect} from "@playwright/test"
+import {Locator, Page, expect} from "@playwright/test";
+import { pageFixture } from "../../hooks/pageFixture";
 
 export class Card{
     static listOfAddedProdNames:String[] = [];
     static sumOfAddedProdPrices = 0;
     readonly actualprodNames:String[] = [];
     readonly page:Page;
-    //readonly cardContainer:Locator;
+    readonly cardContainer:Locator;
     readonly buyBtn:Locator;
     readonly returnLink:Locator;
     readonly actualProdTitles:Locator;
     readonly totalPrice:Locator;
     readonly removeItemBtn:Locator;
 
-    constructor(page:Page){
-        this.page = page;
-        //this.cardContainer = this.page.locator("//ul[@class='products__list']");
+    constructor(){
+        this.page = pageFixture.page;
+        this.cardContainer = this.page.locator("//ul[@class='products__list']");
         this.buyBtn = this.page.locator("#product-buy-button");
         this.returnLink = this.page.locator(".comeback");
         this.actualProdTitles = this.page.locator("//div[@class='title']//p[@class='text']");
