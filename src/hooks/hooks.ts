@@ -16,19 +16,26 @@ BeforeAll(async function() {
     browser = await invokeBrowser();
 });
 
-Before(async function({ pickle }) {
+Before({ tags: "not @auth"}, async function({ pickle }) {
     const scenarioName = pickle.name + pickle.id;
     context = await browser.newContext({
         recordVideo: {
             dir: "test-results/videos/",
         },
     });
+
+    await context.tracing.start({
+        name: scenarioName,
+        title: pickle.name,
+        sources: true,
+        screenshots: true, snapshots: true
+    });
     const page = await browser.newPage();
     pageFixture.page = page;
     pageFixture.logger = createLogger(options(scenarioName));
 });
 
-Before("@auth", async function({ pickle }) {
+Before({ tags: "@auth" }, async function({ pickle }) {
     const scenarioName = pickle.name + pickle.id;
     context = await browser.newContext({
         storageState: getStorageSession(pickle.name),
@@ -44,15 +51,19 @@ Before("@auth", async function({ pickle }) {
 After(async function({ pickle, result }) {
     console.log(result?.status);
     let videoPath: string;
-    let img: Buffer;
+    //let img: Buffer;
+    const path = `./test-results/reports/trace/${pickle.id}.zip`;
 
-    if(result?.status == Status.PASSED){
+    //if(result?.status == Status.FAILED){
         //screenshot
     const img = await pageFixture.page.screenshot({ path: `./test-results/reports/screenshots/${ pickle.name }.png`, type: "png" });
     await this.attach(img, "image/png");
+
     //videoPath = await pageFixture.page.video().path();
-    }
-    
+    //}
+
+    await context.tracing.stop({ path: path });
+
     await pageFixture.page.close();
     await context.close();
 
