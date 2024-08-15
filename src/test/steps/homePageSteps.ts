@@ -7,7 +7,7 @@ setDefaultTimeout(60 * 1000 * 2);
 export let homePage: HomePage;
 export let asserts: Asserts;
 
-Given('User is navigated to home page', { timeout: 10000},  async function () {
+Given('User is navigated to home page',  async function () {
       homePage = new HomePage();
       asserts = new Asserts(pageFixture.page);
       await homePage.navigateToHomePage();

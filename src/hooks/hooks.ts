@@ -28,12 +28,25 @@ Before(async function({ pickle }) {
     pageFixture.logger = createLogger(options(scenarioName));
 });
 
+Before("@auth", async function({ pickle }) {
+    const scenarioName = pickle.name + pickle.id;
+    context = await browser.newContext({
+        storageState: getStorageSession(pickle.name),
+        recordVideo: {
+            dir: "test-results/videos/",
+        },
+    });
+    const page = await browser.newPage();
+    pageFixture.page = page;
+    pageFixture.logger = createLogger(options(scenarioName));
+});
+
 After(async function({ pickle, result }) {
     console.log(result?.status);
     let videoPath: string;
     let img: Buffer;
 
-    if(result?.status == Status.FAILED){
+    if(result?.status == Status.PASSED){
         //screenshot
     const img = await pageFixture.page.screenshot({ path: `./test-results/reports/screenshots/${ pickle.name }.png`, type: "png" });
     await this.attach(img, "image/png");
@@ -53,3 +66,11 @@ After(async function({ pickle, result }) {
 AfterAll(async function() {
     await browser.close();
 });
+
+function getStorageSession(user: string): string | { cookies: Array<{ name: string; value: string; domain: string; path: string; expires: number; httpOnly: boolean; secure: boolean; sameSite: "Strict" | "Lax" | "None"; }>; origins: Array<{ origin: string; localStorage: Array<{ name: string; value: string; }>; }>; } {
+    if(user.endsWith("admin"))
+        return "src/helper/auth/admin.json";
+      else return "src/helper/auth/otherUser.json";
+}
+
+

@@ -3,7 +3,8 @@ Tests adding items to cart
 
   Background:
     Given User is navigated to home page
-
+  
+  @outline
   Scenario Outline: Add to cart
     When Items catalog is opened
     When "<item>", "<subitem>" are selected
