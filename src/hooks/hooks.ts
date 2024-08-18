@@ -43,6 +43,13 @@ Before({ tags: "@auth" }, async function({ pickle }) {
             dir: "test-results/videos/",
         },
     });
+
+    await context.tracing.start({
+        name: scenarioName,
+        title: pickle.name,
+        sources: true,
+        screenshots: true, snapshots: true
+    });
     const page = await browser.newPage();
     pageFixture.page = page;
     pageFixture.logger = createLogger(options(scenarioName));
